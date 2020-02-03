@@ -23,8 +23,6 @@ statistics = []
 @array_api.route('/user_vars', methods=['GET', 'POST'])
 def serve_user_vars():
 
-    
-
     entered_age = request.json["age_item"]
     entered_income = request.json["income_item"]
     entered_util = request.json["util_item"]
@@ -72,7 +70,6 @@ def calculate_statistics(entered_age, entered_income, entered_util,
                         entered_ninety, entered_realestate,
                         entered_sixtyninety, entered_dependents):
 
-    
     number_of_apps = db.session.query(Variables).count()
     percent_accepted = (((max(map(len, eligible_applicants)))/(number_of_apps) * 100))
     statistics.append({"Percentage accepted: " : "%.2f" % percent_accepted})
@@ -119,7 +116,6 @@ def calculate_statistics(entered_age, entered_income, entered_util,
    
     return jsonify({"stats": statistics})
 
-
 @array_api.route('/accepted_applicants', methods=['GET', 'POST'])
 def serve_all_accepted():
 
@@ -130,10 +126,3 @@ def serve_statistics():
 
     return jsonify({"stats": statistics })
 
-
-
-
-
-
-
-    

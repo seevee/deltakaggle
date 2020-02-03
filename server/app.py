@@ -5,11 +5,7 @@ from sql_alchemy_db_instance import db
 import pandas as pd
 import sqlalchemy.engine.url as url
 
-
-
-
 project_dir = os.path.dirname(os.path.abspath(__file__))
-
 
 def create_app():
     app = Flask(__name__,
@@ -26,7 +22,6 @@ def create_app():
 
     return app
 
-
 def setup_database(app):
 
     with app.app_context():
@@ -34,14 +29,9 @@ def setup_database(app):
         db.create_all()
         engine = db.get_engine()
         trainDF = pd.read_csv('cs-test.csv')
-
             
         if  trainDF is not None:
             return
         else:
             trainDF.to_sql('APPLICANTS', con=engine, index_label='id', if_exists='replace')
-
-
-
-
 

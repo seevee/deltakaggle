@@ -7,8 +7,6 @@ import numpy as np
 from pandas import DataFrame
 from flask_sqlalchemy import SQLAlchemy
 
-
-
 class Variables(db.Model):
 
     __tablename__ = 'APPLICANTS'
@@ -25,7 +23,3 @@ class Variables(db.Model):
     NumberOfTime60to89DaysPastDueNotWorse = db.Column(db.Integer)
     NumberOfDependents = db.Column(db.Integer)
 
-
-
-
-       
