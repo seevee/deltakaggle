@@ -8,11 +8,15 @@ The front end user chooses numeric ranges within a number of variables dictated 
 Fork the github repo
 
 In the server directory, run the following scripts
+
 `pipenv install`
+
 `pipenv install pandas`
 
 In the client directory, run the following scripts
+
 `npm install`
+
 `npm run build`
 
 Create a .env file with the following information --> NOTE: the file should literally be titled `.env`
