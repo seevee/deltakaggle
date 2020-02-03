@@ -9,9 +9,6 @@ app does not clear accepted applicants at refresh of browser
 
 array_api = Blueprint('array_api', __name__)
 
-eligible_applicants = []
-statistics = []
-
 @array_api.route('/user_vars', methods=['GET', 'POST'])
 def serve_user_vars():
 
@@ -33,29 +30,13 @@ def serve_user_vars():
                             Variables.NumberOfOpenCreditLinesAndLoans >= entered_minopenlines, Variables.NumberOfTimes90DaysLate <= entered_ninety,
                             Variables.NumberRealEstateLoansOrLines >= entered_realestate, Variables.NumberOfTime60to89DaysPastDueNotWorse <= entered_sixtyninety,
                             Variables.NumberOfDependents <= entered_dependents)
-    
-    if not eligible_applicants:
 
-        eligible_applicants.append([variable.id for variable in variable_instances])
-        
-    else:
-        eligible_applicants.clear()
-        eligible_applicants.append([variable.id for variable in variable_instances])
+    calculate_statistics(entered_age_min, entered_age_max, entered_income, entered_util,
+            entered_thirtysixty, entered_debtratio, entered_minopenlines,
+            entered_ninety, entered_realestate, entered_sixtyninety,
+            entered_dependents)
 
-    if not statistics:
-
-        calculate_statistics(entered_age_min, entered_age_max, entered_income, entered_util, 
-                        entered_thirtysixty, entered_debtratio, entered_minopenlines,
-                        entered_ninety, entered_realestate, entered_sixtyninety,
-                        entered_dependents)
-    else:
-        statistics.clear()
-        calculate_statistics(entered_age_min, entered_age_max, entered_income, entered_util, 
-                        entered_thirtysixty, entered_debtratio, entered_minopenlines,
-                        entered_ninety, entered_realestate, entered_sixtyninety,
-                        entered_dependents)
-    
-    return jsonify({"items": eligible_applicants})
+    return jsonify({"items": [variable.id for variable in variable_instances]})
 
 @array_api.route('/calculate_statistics', methods=['GET', 'POST'])
 def calculate_statistics(entered_age_min, entered_age_max, entered_income, entered_util,
@@ -63,6 +44,7 @@ def calculate_statistics(entered_age_min, entered_age_max, entered_income, enter
                         entered_ninety, entered_realestate,
                         entered_sixtyninety, entered_dependents):
 
+    statistics = []
     number_of_apps = db.session.query(Variables).count()
     percent_accepted = (((max(map(len, eligible_applicants)))/(number_of_apps) * 100))
     statistics.append({"Percentage accepted: " : "%.2f" % percent_accepted})
