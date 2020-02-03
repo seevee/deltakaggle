@@ -1,0 +1,6 @@
+### From Jamie Floumoy on SO: https://stackoverflow.com/a/932982/3366431
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
+
