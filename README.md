@@ -11,8 +11,6 @@ In the server directory, run the following scripts
 
 `pipenv install`
 
-`pipenv install pandas`
-
 In the client directory, run the following scripts
 
 `npm install`
@@ -25,10 +23,10 @@ The information in this file with facilitate configuration for the DB instance
 
 APP_ID = 'insert your data'
 APP_SECRET = 'insert your data'
-DB_LOCATION = 'insert your data'
-DB_USERNAME = 'insert your data'
+DB_URL = 'insert your data'
+DB_NAME = 'insert your data'
+DB_USER = 'insert your data'
 DB_PASS = 'insert your data'
-CALLBACK_URL = 'insert your data'
 
 To run the program on your local host(https://localhost:5000/) switch back to server directory and run
 
