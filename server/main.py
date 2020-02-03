@@ -14,7 +14,7 @@ def add_vue_routes(app):
         """
         Clear Cache for hot-reloading
         """
-        req.headers["Cache-Control"] = "no-cache"
+        req.headers['Cache-Control'] = 'no-cache'
         return req
 
 app = create_app()
