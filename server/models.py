@@ -1,11 +1,5 @@
 from sql_alchemy_db_instance import db
-import pandas as pd
-import sqlite3
 from sqlalchemy import Column, Integer, Float
-import pandas as pd
-import numpy as np
-from pandas import DataFrame
-from flask_sqlalchemy import SQLAlchemy
 
 class Variables(db.Model):
 

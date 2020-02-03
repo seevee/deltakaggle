@@ -1,11 +1,4 @@
 from flask import Blueprint, jsonify, request
-import pandas as pd
-import numpy as np
-import csv
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine
-from pandas import DataFrame
-import sqlite3
 from models import Variables
 from sql_alchemy_db_instance import db
 from sqlalchemy.sql import func

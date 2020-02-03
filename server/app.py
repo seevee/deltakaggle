@@ -1,9 +1,8 @@
 import os
-from flask import Flask, render_template
-from arrayAPI import array_api, Variables
+from flask import Flask
+from arrayAPI import array_api
 from sql_alchemy_db_instance import db
 import pandas as pd
-import sqlalchemy.engine.url as url
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
 
