@@ -24,25 +24,33 @@ def serve_user_vars():
     sixtyninety = request.json['sixtyninety_item'][0]
     dependents = request.json['dependents_item'][0]
 
-    variable_instances = db.session.query(Variables).filter(Variables.Age >= age_min, Variables.Age <= age_max,
-                            Variables.MonthlyIncome >= income, Variables.RevolvingUtilizationOfUnsecuredLines <= util,
-                            Variables.NumberOfTime30to59DaysPastDueNotWorse <= thirtysixty, Variables.DebtRatio <= debtratio,
-                            Variables.NumberOfOpenCreditLinesAndLoans >= minopenlines, Variables.NumberOfTimes90DaysLate <= ninety,
-                            Variables.NumberRealEstateLoansOrLines >= realestate, Variables.NumberOfTime60to89DaysPastDueNotWorse <= sixtyninety,
-                            Variables.NumberOfDependents <= dependents)
+    variable_instances = db.session.query(Variables).filter(
+            Variables.Age >= age_min,
+            Variables.Age <= age_max,
+            Variables.MonthlyIncome >= income,
+            Variables.RevolvingUtilizationOfUnsecuredLines <= util,
+            Variables.NumberOfTime30to59DaysPastDueNotWorse <= thirtysixty,
+            Variables.DebtRatio <= debtratio,
+            Variables.NumberOfOpenCreditLinesAndLoans >= minopenlines,
+            Variables.NumberOfTimes90DaysLate <= ninety,
+            Variables.NumberRealEstateLoansOrLines >= realestate,
+            Variables.NumberOfTime60to89DaysPastDueNotWorse <= sixtyninety,
+            Variables.NumberOfDependents <= dependents)
 
-    calculate_statistics(age_min, age_max, income, util,
-            thirtysixty, debtratio, minopenlines,
-            ninety, realestate, sixtyninety,
-            dependents)
+    calculate_statistics(
+            age_min, age_max, income,
+            util, thirtysixty, debtratio,
+            minopenlines, ninety, realestate,
+            sixtyninety, dependents)
 
     return jsonify({'items': [variable.id for variable in variable_instances]})
 
 @array_api.route('/calculate_statistics', methods=['GET', 'POST'])
-def calculate_statistics(age_min, age_max, income, util,
-                        thirtysixty, debtratio, minopenlines,
-                        ninety, realestate,
-                        sixtyninety, dependents):
+def calculate_statistics(
+        age_min, age_max, income,
+        util, thirtysixty, debtratio,
+        minopenlines, ninety, realestate,
+        sixtyninety, dependents):
 
     statistics = []
     number_of_apps = db.session.query(Variables).count()
