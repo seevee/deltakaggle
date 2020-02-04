@@ -21,15 +21,7 @@ def create_app():
     return app
 
 def setup_database(app):
-
     with app.app_context():
-    
         db.create_all()
-        engine = db.get_engine()
-        trainDF = pd.read_csv('cs-test.csv')
-            
-        if trainDF is not None:
-            return
-        else:
-            trainDF.to_sql('APPLICANTS', con=engine, index_label='id', if_exists='replace')
+        return
 
