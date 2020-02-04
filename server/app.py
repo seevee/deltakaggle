@@ -9,8 +9,7 @@ project_dir = os.path.dirname(os.path.abspath(__file__))
 def create_app():
     app = Flask(__name__,
         static_folder = './dist/static',
-        template_folder = './dist'
-    )
+        template_folder = './dist')
     if os.environ['RUN_ENVIRONMENT'] == 'network':
         app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://{user}:{pw}@{url}/{db}'.format(user=os.environ['DB_USER'],pw=os.environ['DB_PASS'],url=os.environ['DB_URL'],db=os.environ['DB_NAME'])
     else:
@@ -29,7 +28,7 @@ def setup_database(app):
         engine = db.get_engine()
         trainDF = pd.read_csv('cs-test.csv')
             
-        if  trainDF is not None:
+        if trainDF is not None:
             return
         else:
             trainDF.to_sql('APPLICANTS', con=engine, index_label='id', if_exists='replace')
