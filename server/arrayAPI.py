@@ -24,7 +24,7 @@ def serve_user_vars():
     entered_sixtyninety = request.json['sixtyninety_item'][0]
     entered_dependents = request.json['dependents_item'][0]
 
-    variable_instances = db.session.query(Variables).filter(Variables.age >= entered_age_min, Variables.age <= entered_age_max,
+    variable_instances = db.session.query(Variables).filter(Variables.Age >= entered_age_min, Variables.Age <= entered_age_max,
                             Variables.MonthlyIncome >= entered_income, Variables.RevolvingUtilizationOfUnsecuredLines <= entered_util,
                             Variables.NumberOfTime30to59DaysPastDueNotWorse <= entered_thirtysixty, Variables.DebtRatio <= entered_debtratio,
                             Variables.NumberOfOpenCreditLinesAndLoans >= entered_minopenlines, Variables.NumberOfTimes90DaysLate <= entered_ninety,
@@ -48,8 +48,8 @@ def calculate_statistics(entered_age_min, entered_age_max, entered_income, enter
     number_of_apps = db.session.query(Variables).count()
     percent_accepted = (((max(map(len, eligible_applicants)))/(number_of_apps) * 100))
     statistics.append({'Percentage accepted: ' : '%.2f' % percent_accepted})
-    average_age = db.session.query(func.avg(Variables.age)) \
-        .filter(Variables.age >= entered_age_min, Variables.age <= entered_age_max) \
+    average_age = db.session.query(func.avg(Variables.Age)) \
+        .filter(Variables.Age >= entered_age_min, Variables.Age <= entered_age_max) \
         .scalar()
     statistics.append({'Average age of accepted: ' : '%.2f' % average_age})
     average_income = db.session.query(func.avg(Variables.MonthlyIncome)) \

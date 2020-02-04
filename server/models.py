@@ -7,7 +7,7 @@ class Variables(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     SeriousDlqin2yrs =  db.Column(db.Integer)
     RevolvingUtilizationOfUnsecuredLines = db.Column(db.Float)
-    age = db.Column(db.Integer)
+    Age = db.Column(db.Integer)
     NumberOfTime30to59DaysPastDueNotWorse = db.Column(db.Integer)
     DebtRatio = db.Column(db.Float)
     MonthlyIncome = db.Column(db.Integer)
