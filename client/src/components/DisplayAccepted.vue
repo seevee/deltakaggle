@@ -5,14 +5,11 @@
       <p>Eligible Applicants by ID</p>
       <li v-for="items in eligible_applicants" v-bind:key="items">{{ items }}</li>
     </ul>
-
     <ul>
       <p>Eligible Applicants Statistics</p>
       <li v-for="stats in statistics" v-bind:key="stats">{{ stats }}</li>
     </ul>
-
     <button v-on:click="displayData();">Display Accepted</button>
-
   </div>
 </template>
 
@@ -21,7 +18,6 @@ import axios from 'axios'
 
 export default {
   name: 'DisplayAccepted',
-
   data () {
     return {
       eligible_applicants: [],
@@ -41,14 +37,12 @@ export default {
         })
     }
   },
-
   mounted: function () {
     this.$nextTick(function () {
       this.displayData()
     })
   }
 }
-
 </script>
 
 <style>
