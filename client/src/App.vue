@@ -4,7 +4,7 @@
     <div>
       <button @click="handleNavClick">{{buttonText}}</button>
     </div>
-    
+
     <div v-if="!showInputFields">
       <Welcome  />
     </div>
@@ -15,7 +15,7 @@
     <div v-else>
       <UserVars @dataEntered='dataEntered' title="Delta Bank Credit Applications" />
     </div>
-    
+
   </div>
 </template>
 
@@ -31,14 +31,14 @@ export default {
     UserVars,
     Welcome,
     DisplayAccepted
-    
+
   },
 
   data() {
     return {
       showInputFields: false,
       allDataEntered: false,
-     
+
       buttonText: "Show Fields for Input of Variables",
       fromUserVars: '',
       eligible_applicants: [],
@@ -46,8 +46,8 @@ export default {
   },
 
 
-methods: {  
-   handleNavClick() {
+  methods: {
+    handleNavClick() {
       this.showInputFields = !this.showInputFields;
       if (this.buttonText ===  'Show Fields for Input of Variables') {
         this.buttonText = 'Show Welcome Screen'
@@ -55,9 +55,9 @@ methods: {
         this.buttonText =  'Show Fields for Input of Variables'
       }
     },
-     dataEntered (value) {
-     console.log("alldataentered in parent    "   + this.allDataEntered)
-     this.allDataEntered = value
+    dataEntered (value) {
+      console.log("alldataentered in parent    "   + this.allDataEntered)
+      this.allDataEntered = value
     }
   }
 }
