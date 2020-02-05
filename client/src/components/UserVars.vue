@@ -30,12 +30,10 @@
 </template>
 
 <script>
-import axios from 'axios';
-
-
+import axios from 'axios'
 
 export default {
-  name: "UserVars",
+  name: 'UserVars',
   props: ['title'],
 
   data () {
@@ -88,7 +86,7 @@ export default {
 
     },
     dataEntered () {
-      console.log("alldataentered line 92   "  + this.allDataEntered)
+      console.log('alldataentered line 92   '  + this.allDataEntered)
       this.$emit('dataEntered', this.allDataEntered)
     },
   }

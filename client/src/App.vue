@@ -39,12 +39,11 @@ export default {
       showInputFields: false,
       allDataEntered: false,
 
-      buttonText: "Show Fields for Input of Variables",
+      buttonText: 'Show Fields for Input of Variables',
       fromUserVars: '',
       eligible_applicants: [],
     }
   },
-
 
   methods: {
     handleNavClick() {
@@ -56,7 +55,7 @@ export default {
       }
     },
     dataEntered (value) {
-      console.log("alldataentered in parent    "   + this.allDataEntered)
+      console.log('alldataentered in parent    '   + this.allDataEntered)
       this.allDataEntered = value
     }
   }

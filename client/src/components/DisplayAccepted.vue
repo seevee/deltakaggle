@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
 export default {
   name: 'DisplayAccepted',
@@ -33,7 +33,7 @@ export default {
       axios.get('/accepted_applicants')
         .then((resp) => {
           this.eligible_applicants = resp.data.items;
-          console.log("appllicant length    " + this.eligible_applicants.length)
+          console.log('appllicant length    ' + this.eligible_applicants.length)
         }),
         axios.get('/applicants_stats')
         .then((resp) => {
@@ -44,7 +44,7 @@ export default {
 
   mounted: function () {
     this.$nextTick(function () {
-      this.displayData();
+      this.displayData()
     })
   }
 }
