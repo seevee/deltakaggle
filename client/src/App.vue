@@ -5,10 +5,10 @@
       <button @click="handleNavClick">{{buttonText}}</button>
     </div>
     <div v-if="!showInputFields">
-      <Welcome  />
+      <Welcome />
     </div>
     <div v-else-if="allDataEntered">
-      <DisplayAccepted  />
+      <DisplayAccepted />
     </div>
     <div v-else>
       <UserVars @dataEntered='dataEntered' title="Delta Bank Credit Applications" />
