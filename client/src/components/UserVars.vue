@@ -76,7 +76,6 @@ export default {
       const result = await axios.post('user_vars', { age_item: this.age_range, income_item: this.min_income, util_item: this.max_revolving, thirtysixty_item: this.max_thirtysixty,
         debtratio_item: this.max_debtratio, minlines_item: this.min_openlines, ninety_item: this.max_ninety, 
         realestate_item: this.min_realestate, sixtyninety_item: this.max_sixtyninety, dependents_item: this.max_dependents})
-      console.log(result.data)
       this.$emit('dataEntered', result.data)
     },
   }

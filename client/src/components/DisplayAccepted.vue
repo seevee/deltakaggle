@@ -3,11 +3,11 @@
     <p>Accepted</p>
     <ul>
       <p>Eligible Applicants by ID</p>
-      <li v-for="items in data.items" v-bind:key="items">{{ items }}</li>
+      <li v-for="(item, index) in data.items" v-bind:key="index">{{ item }}</li>
     </ul>
     <ul>
       <p>Eligible Applicants Statistics</p>
-      <li v-for="stats in data.stats" v-bind:key="stats">{{ stats }}</li>
+      <li v-for="(stat, index) in data.stats" v-bind:key="index">{{ stat }}</li>
     </ul>
     <button v-on:click="displayData();">Display Accepted</button>
   </div>
