@@ -3,10 +3,6 @@ from models import Variables
 from sql_alchemy_db_instance import db
 from sqlalchemy.sql import func
 
-"""
-app does not clear accepted applicants at refresh of browser
-"""
-
 array_api = Blueprint('array_api', __name__)
 
 @array_api.route('/user_vars', methods=['GET', 'POST'])
@@ -37,24 +33,29 @@ def serve_user_vars():
             Variables.NumberOfTime60to89DaysPastDueNotWorse <= sixtyninety,
             Variables.NumberOfDependents <= dependents)
 
-    calculate_statistics(
+    eligible_applicants = [variable.id for variable in variable_instances]
+
+    statistics = calculate_statistics(
+            eligible_applicants,
             age_min, age_max, income,
             util, thirtysixty, debtratio,
             minopenlines, ninety, realestate,
             sixtyninety, dependents)
 
-    return jsonify({'items': [variable.id for variable in variable_instances]})
+    return jsonify({'items': eligible_applicants, 'stats': statistics})
 
-@array_api.route('/calculate_statistics', methods=['GET', 'POST'])
 def calculate_statistics(
+        eligible_applicants,
         age_min, age_max, income,
         util, thirtysixty, debtratio,
         minopenlines, ninety, realestate,
         sixtyninety, dependents):
 
-    statistics = []
     number_of_apps = db.session.query(Variables).count()
-    percent_accepted = (((max(map(len, eligible_applicants)))/(number_of_apps) * 100))
+    if number_of_apps < 1:
+        return
+    percent_accepted = (len(eligible_applicants) / number_of_apps) * 100
+    statistics = []
     statistics.append({'Percentage accepted: ' : '%.2f' % percent_accepted})
     average_age = db.session.query(func.avg(Variables.Age)) \
         .filter(Variables.Age >= age_min, Variables.Age <= age_max) \
@@ -97,15 +98,5 @@ def calculate_statistics(
         .scalar()
     statistics.append({'Average number dependents of accepted: ' : '%.2f' % average_dependents})
    
-    return jsonify({'stats': statistics})
-
-@array_api.route('/accepted_applicants', methods=['GET', 'POST'])
-def serve_all_accepted():
-
-   return jsonify({'items': eligible_applicants})
-
-@array_api.route('/applicants_stats', methods=['GET', 'POST'])
-def serve_statistics():
-
-    return jsonify({'stats': statistics })
+    return statistics
 
