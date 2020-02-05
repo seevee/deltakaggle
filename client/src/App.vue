@@ -8,10 +8,10 @@
       <Welcome />
     </div>
     <div v-else-if="allDataEntered">
-      <DisplayAccepted />
+      <DisplayAccepted v-bind:data="allDataEntered" />
     </div>
     <div v-else>
-      <UserVars @dataEntered='dataEntered' title="Delta Bank Credit Applications" />
+      <UserVars @dataEntered="dataEntered" title="Delta Bank Credit Applications" />
     </div>
   </div>
 </template>

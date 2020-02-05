@@ -23,7 +23,7 @@
     <br>
     <input v-model="inputMaxDependentsValue"/><label for="inputMaxDependentsValue"> Enter Maximum Number of Dependents</label>
     <br>
-    <button v-on:click="enterAccepted(); dataEntered();">Submit Variables to Accept Applications</button>
+    <button v-on:click="enterAccepted()">Submit Variables to Accept Applications</button>
   </div>
 </template>
 
@@ -36,7 +36,6 @@ export default {
 
   data () {
     return {
-      allDataEntered: true,
       age_range: [],
       min_income: [],
       max_revolving: [],
@@ -62,7 +61,7 @@ export default {
     }
   },
   methods: {
-    enterAccepted() {
+    async enterAccepted() {
       this.age_range.push(this.inputMinAgeValue)
       this.age_range.push(this.inputMaxAgeValue)
       this.min_income.push(this.inputMinIncomeValue)
@@ -74,13 +73,11 @@ export default {
       this.min_realestate.push(this.inputMinRealEstateValue)
       this.max_sixtyninety.push(this.inputMaxSixtyNinetyValue)
       this.max_dependents.push(this.inputMaxDependentsValue)
-      axios.post('user_vars', { age_item: this.age_range, income_item: this.min_income, util_item: this.max_revolving, thirtysixty_item: this.max_thirtysixty,
+      const result = await axios.post('user_vars', { age_item: this.age_range, income_item: this.min_income, util_item: this.max_revolving, thirtysixty_item: this.max_thirtysixty,
         debtratio_item: this.max_debtratio, minlines_item: this.min_openlines, ninety_item: this.max_ninety, 
         realestate_item: this.min_realestate, sixtyninety_item: this.max_sixtyninety, dependents_item: this.max_dependents})
-    },
-    dataEntered () {
-      console.log('alldataentered line 92   '  + this.allDataEntered)
-      this.$emit('dataEntered', this.allDataEntered)
+      console.log(result.data)
+      this.$emit('dataEntered', result.data)
     },
   }
 }
